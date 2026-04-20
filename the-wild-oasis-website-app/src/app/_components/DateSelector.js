@@ -1,4 +1,3 @@
-
 "use client"
 import { isWithinInterval } from "date-fns";
 import { useState } from "react";
@@ -27,14 +26,13 @@ function DateSelector({settings,bookedDates,cabin}) {
 
   // SETTINGS
   const {minBookingLength,maxBookingLength} = settings;
-
-
   return (
     <div className="grid grid-rows-1 justify-between">
       <DayPicker
          className="pt-12 place-self-center"       
         mode="range"
-        onSelect={(range)=> setRange(range)}  
+        // onSelect={(range)=> setRange(range)}  
+        onSelect={setRange}
         selected={range}   
         min={minBookingLength + 1}
         max={maxBookingLength}
