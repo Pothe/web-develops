@@ -14,7 +14,7 @@ function isAlreadyBooked(range, datesArr) {
   );
 }
 
-function DateSelector() {
+function DateSelector({settings,bookedDates,cabin}) {
   // CHANGE
   const regularPrice = 23;
   const discount = 23;
@@ -23,8 +23,8 @@ function DateSelector() {
   const range = { from: null, to: null };
 
   // SETTINGS
-  const minBookingLength = 1;
-  const maxBookingLength = 23;
+  const {minBookingLength,maxBookingLength} = settings;
+
 
   return (
     <div className="grid grid-rows-1 justify-between">
@@ -45,8 +45,8 @@ function DateSelector() {
         numberOfMonths={2}
       />
 
-      <div className="flex items-center justify-between w-auto px-8 bg-yellow-700 text-primary-800 h-[72px]">
-        <div className="flex items-baseline gap-6">
+      <div className="flex items-center justify-between   px-8 bg-yellow-700 text-blue-950 h-[72px] ">
+        <div className="flex items-baseline  gap-10 justify-between">
           <p className="flex gap-2 items-baseline">
             {discount > 0 ? (
               <>

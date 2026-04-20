@@ -25,8 +25,7 @@ export async function generateStaticParams(){
 
 export default async function Page({params}) {
     const cabin = await getCabin(params.id)
-    // const bookedDate = getBookedDatesByCabinId(params.id)
-    // const settings = await getSettings()
+    
 
   const { id, name, maxCapacity, regularPrice, discount, image, description } =cabin;
   return (
@@ -70,11 +69,11 @@ export default async function Page({params}) {
 
       <div>
         <h2 className="text-5xl font-semibold text-center mb-5 ">
-          Reserve today. Pay on arrival.
+          Reserve {name}. Pay on arrival.
         </h2>
 
     <Suspense fallback={<Spinner/>}>
-     <Reservation cabin={params}/>
+     <Reservation cabin={cabin}/>
      </Suspense>
       </div>
        
