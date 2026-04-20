@@ -1,7 +1,9 @@
 import localFont from "next/font/local";
 import '../styles/globals.css'
 import Header from "./_components/Header";
-import Footer from "./_components/footer";
+import { ReservationProdiver } from "./_components/ReservationProvider";
+// import Footer from "./_components/footer";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,7 +31,13 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header/>
-        <main className="max-w-screen-2xl mx-auto ">{children}</main>
+        <main className="max-w-screen-2xl mx-auto ">
+                <ReservationProdiver>
+                 {children}
+                 </ReservationProdiver>
+      
+       
+          </main>
       {/* <Footer/> */}
       </body>
     </html>
