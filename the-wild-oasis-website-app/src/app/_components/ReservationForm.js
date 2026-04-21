@@ -1,10 +1,11 @@
 "use client"
+import { format, formatDate } from "date-fns";
 import { useReservation } from "./ReservationProvider";
 function ReservationForm({cabin}) {
   const {range}= useReservation()
   const {maxCapacity} = cabin;
 
-
+ const DisplayDate = !range.from && !range.to
   return (
     <div className=' bg-gray-600'>
       <div className='bg-primary-800 text-primary-300 py-5 px-5   flex justify-between items-center bg-gray-400 '>
@@ -20,8 +21,12 @@ function ReservationForm({cabin}) {
           />
           <p>{user.name}</p>
         </div> */}
-  <p>{String(range.from)}to {String(range.to)}</p>
+       
+  
       </div>
+{!DisplayDate? <p className="px-4">{format(new Date(range.from),"MMM dd yy")} to {formatDate(new Date(range.to),"MMM dd yy")}</p>:""}
+
+ 
 
       <form className='bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col'>
         <div className='space-y-2'>

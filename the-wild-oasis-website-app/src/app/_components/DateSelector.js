@@ -14,7 +14,9 @@ function isAlreadyBooked(range, datesArr) {
 }
 
 function DateSelector({settings,bookedDates,cabin}) {
-  const {range,setRange} = useReservation()
+  const {range,setRange,resetRange} = useReservation()
+  const today = new Date()
+
 
   // CHANGE
   const regularPrice = 23;
@@ -27,7 +29,8 @@ function DateSelector({settings,bookedDates,cabin}) {
   return (
     <div className="grid grid-rows-1 justify-between">
       <DayPicker
-         className="pt-12 place-self-center"       
+         className="pt-12 place-self-center"   
+         disabled={{before:today}}    
         mode="range"
         // onSelect={(range)=> setRange(range)}  
         onSelect={setRange}
@@ -39,6 +42,8 @@ function DateSelector({settings,bookedDates,cabin}) {
         toYear={new Date().getFullYear() + 5}
         captionLayout="dropdown"
         numberOfMonths={2}
+   
+
       />
 
       <div className="flex items-center justify-between   px-8 bg-yellow-700 text-blue-950 h-[72px] ">
