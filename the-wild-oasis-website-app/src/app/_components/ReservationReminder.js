@@ -5,12 +5,10 @@ import { format } from 'date-fns';
 import { useReservation } from './ReservationProvider';
 
 function ReservationReminder() {
-  // CHANGE
-  // const range = { from: null, to: null };
-
    const {range, resetRange}= useReservation()
   
-  if (!range.from || !range.to) return null;
+   if(!range.from && !range.to) return null
+ 
 
   return (
     <div className='fixed bottom-6 left-1/2 -translate-x-1/2 py-5 px-8 rounded-full bg-yellow-500 text-primary-800 text  font-semibold shadow-xl shadow-slate-900 flex gap-8 items-center'>
