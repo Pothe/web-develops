@@ -1,9 +1,10 @@
 "use client"
 import { format, formatDate } from "date-fns";
 import { useReservation } from "./ReservationProvider";
-function ReservationForm({cabin}) {
+
+ function ReservationForm({cabin,user}) {
   const {range}= useReservation()
-  const {maxCapacity} = cabin;
+  const {maxCapacity} = cabin; 
 
  const DisplayDate = !range.from && !range.to
   return (
@@ -11,7 +12,7 @@ function ReservationForm({cabin}) {
       <div className='bg-primary-800 text-primary-300 py-5 px-5   flex justify-between items-center bg-gray-400 '>
         <p >Logged in as</p>
 
-        {/* <div className='flex gap-4 items-center'>
+     <div className='flex gap-4 items-center'>
           <img
             // Important to display google profile images
             referrerPolicy='no-referrer'
@@ -20,7 +21,7 @@ function ReservationForm({cabin}) {
             alt={user.name}
           />
           <p>{user.name}</p>
-        </div> */}
+        </div> 
        
   
       </div>
