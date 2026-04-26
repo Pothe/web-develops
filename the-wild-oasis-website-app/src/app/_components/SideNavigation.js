@@ -28,8 +28,8 @@ const navLinks = [
 function SideNavigation() {
   const pathName= usePathname()
   return (
-    <nav className='border-r border-blue-400'>
-      <ul className='flex flex-col gap-2 h-screen text-lg'>
+    <nav className='border-r border-blue-400 flex flex-col min-h-screen  '>
+      <ul className='flex flex-col gap-2  text-lg flex-1'>
         {navLinks.map((link) => (
           <li key={link.name} className={`hover:bg-blue-400 hover:-top-8  hover:-bottom-8    ${pathName===link.href?"bg-blue-400 -top-8  -bottom-8  ":""} `}>
             <a
@@ -42,10 +42,9 @@ function SideNavigation() {
           </li>
         ))}
 
-        <li className='mt-auto'>
-          <SignOutButton />
-        </li>
+        
       </ul>
+       <SignOutButton/>
     </nav>
   );
 }
