@@ -40,9 +40,7 @@ function SideNavigation() {
               <span>{link.name}</span>
             </a>
           </li>
-        ))}
-
-        
+        ))}        
       </ul>
        <SignOutButton/>
     </nav>

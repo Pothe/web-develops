@@ -14,8 +14,8 @@ import Image from "next/image";
 // ]
 
 export default async function Navigation() {
-  const userSession = await auth()
-  console.log(userSession)
+  const session= await auth()
+
   // const pathname=  usePathname()
  
   return (
@@ -23,14 +23,14 @@ export default async function Navigation() {
       <ul className="flex gap-16 items-center">
             <li><Link href={'/cabins'} >Cabins</Link></li>
             <li><Link href={'/about'}>about us</Link></li>
-           {userSession?.user?.name? <div className="flex gap-4 items-center"> 
+           {session?.user?.name? <div className="flex gap-4 items-center"> 
               <img className="rounded-full w-8"
-              src={userSession.user.image}           
+              src={session.user.image}           
               alt="Picture of the author"
               referrerPolicy="no-referrer"
              
               />
-            <span> <Link href={'/account'}>{userSession.user.name}</Link></span>
+            <span> <Link href={'/account'}>{session.user.name}</Link></span>
             </div>
            :
            <span><Link href={'/account'}>Guest Area</Link></span>}   
