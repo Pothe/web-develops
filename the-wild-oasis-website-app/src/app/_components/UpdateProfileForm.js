@@ -7,7 +7,8 @@ import { updateGuest } from '../_lib/actions'
 
 export default function UpdateProfileForm({children,guest}) {
   const [count,setCount]= useState ("")
- const {fullName,email}= guest 
+ const {fullName,email,NationalID}= guest 
+
  const countryFlag = "/pt.jpg";
        
     return (
@@ -49,6 +50,7 @@ export default function UpdateProfileForm({children,guest}) {
           <label htmlFor="nationalID">National ID number</label>
           <input
             name="NationalID"
+            defaultValue={NationalID}
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
           />
         </div>
