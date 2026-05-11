@@ -1,9 +1,8 @@
 import ReservationCard from "@/app/_components/ReservationCard";
-
-
-export default function Page() {
+import { getBooking } from "@/app/_lib/actions";
+export default async function Page() {
   // CHANGE
-  const bookings = [];
+  const bookings  = await getBooking()
 
   return (
     <div>

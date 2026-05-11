@@ -1,5 +1,7 @@
 "use server"
+import { revalidatePath } from "next/cache";
 import { signIn,signOut,auth } from "./Auth";
+import { getBookings } from "./data-service";
 import { supabase } from "./supabase";
 
 export  async function signInAction(){
@@ -27,6 +29,39 @@ export async function updateGuest(formData){
      }
    
 }
+
+
+export async function getBooking(userid){
+    const session = await auth()
+   if(!session) throw new Error("Please login first!");
+  const { data, error, count } = await supabase
+    .from('Bookings')
+    // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
+    .select(
+      'id, created_at, startDate, endDate, numNights, numGuests, totalPrice, guestId, cabinId, cabins(name, image)'
+    )
+    .eq('guestId', session.user.userid)
+    .order('startDate');
+
+  if (error) {
+    console.error(error);
+    throw new Error('Bookings could not get loaded');
+  }
+  return data;
+}
+
+
+export async function deleteBooking(bookingId) {
+  const session = await auth();
+  if (!session) throw new Error("You must be logged in");
+
+  const {error }= await supabase.from("Bookings").delete().eq('id',bookingId)
+  if(error) throw new Error("Can not delete"); 
+  console.log("testing con")
+
+  revalidatePath('account/reservations')
+}
+
 
 export async function signOutAction(){
     await signOut({redirectTo:"/"})
