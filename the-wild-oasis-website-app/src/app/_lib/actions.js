@@ -54,11 +54,8 @@ export async function getBooking(userid){
 export async function deleteBooking(bookingId) {
   const session = await auth();
   if (!session) throw new Error("You must be logged in");
-
-  const {error }= await supabase.from("Bookings").delete().eq('id',bookingId)
+  const {error } = await supabase.from("Bookings").delete().eq('id',bookingId)
   if(error) throw new Error("Can not delete"); 
-  console.log("testing con")
-
   revalidatePath('account/reservations')
 }
 
