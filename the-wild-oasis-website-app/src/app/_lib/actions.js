@@ -52,10 +52,20 @@ export async function getBooking(userid){
 
 
 export async function deleteBooking(bookingId) {
+
+  //1 authentication
   const session = await auth();
   if (!session) throw new Error("You must be logged in");
+  // 2 authentication
+  const guestBooking = await getBookings(session.user.userid)
+  const guestBookingids = guestBooking.map((booked)=>booked.id)
+  // looking for id in array, if not found id matched, user no permission to delete
+ if(!guestBookingids.includes(bookingId)) throw new Error("you are not allow to delete this booking");
+
+ // delete booking  
   const {error } = await supabase.from("Bookings").delete().eq('id',bookingId)
-  if(error) throw new Error("Can not delete"); 
+  if(error) throw new Error("Booking could not be deleted"); 
+  // manaul cache
   revalidatePath('account/reservations')
 }
 
