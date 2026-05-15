@@ -1,7 +1,7 @@
 "use server"
 import { revalidatePath } from "next/cache";
 import { signIn,signOut,auth } from "./Auth";
-import { getBookings } from "./data-service";
+import { getBookings, updateBooking } from "./data-service";
 import { supabase } from "./supabase";
 
 export  async function signInAction(){
@@ -70,6 +70,12 @@ export async function deleteBooking(bookingId) {
 }
 
 ///
+
+export async function updatedBookingbyId(formData){
+  const session = await auth()
+  if(!session) throw new Error("You have to login")
+  console.log(formData)
+}
 
 export async function signOutAction(){
     await signOut({redirectTo:"/"})
